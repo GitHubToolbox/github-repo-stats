@@ -34,12 +34,11 @@ class GithubRepoStats
         end
 
         def filter_data(repos, options)
-            results = repos.map do |hash|
+            repos.map do |hash|
                 next if hash['private'] == true && flag_set?(options, :public_only)
 
                 { :slug => hash['full_name'], :repo => hash['name'], :org => hash['owner']['login'], :watchers => hash['watchers_count'], :stargazers => hash['stargazers_count'], :forks => hash['forks'] }
             end.compact.sort_by { |repo| repo[:repo].downcase }
-            results
         end
 
         def process_results(results, options)

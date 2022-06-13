@@ -24,13 +24,11 @@ class GithubRepoStats
         def get_stats(options = {})
             raise StandardError.new('Please supply a token (-t)') unless get_option(options, :token)
 
-            # The following is to force github-lister-core to only retun repo slugs
-            #options[:use_slugs] = true
             options[:add_workflows] = true
 
             repos = get_repo_list(options)
 
-            results, repo_count, error_count = process_results(repos, options)
+            results, repo_count = process_results(repos, options)
             draw_report(results, repo_count, options)
         end
     end

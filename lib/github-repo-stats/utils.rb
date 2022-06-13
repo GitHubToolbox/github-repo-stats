@@ -41,11 +41,6 @@ class GithubRepoStats
             results.size
         end
 
-        # This method smells of :reek:UtilityFunction
-        def filter_results(results, options)
-
-        end
-
         def get_option(options, name)
             options[name] if options.key?(name)
         end

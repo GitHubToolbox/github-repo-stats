@@ -33,7 +33,7 @@ def add_parameters(parser, options)
 end
 
 # This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
-def add_repo_flag_parameters(parser, options)
+def add_repo_parameters(parser, options)
     parser.separator ''
     parser.separator 'Cloning Parameters:'
     parser.on('-u', '--user <names>', 'Github username(s) to rip') { |user| options[:user] = user }
@@ -42,6 +42,13 @@ def add_repo_flag_parameters(parser, options)
     parser.on('-M', '--org-member-repos', TrueClass, 'Rip all of the repositories for all organisation the user(s) is a member of') { |_quiet| options[:org_members_repos] = true }
     parser.on('-A', '--all-repos', TrueClass, 'Same as running -U -M') { |_silent| options[:all_repos] = true }
     parser.on('-O', '--org-repos', TrueClass, 'Rip all of the repositories for the named organisation(s)') { |_errors| options[:org_repos] = true }
+    [parser, options]
+end
+
+# This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
+def add_repo_flag_parameters(parser, options)
+    parser.separator ''
+    parser.separator 'Cloning Flags:'
     parser.on('-P', '--public-only', TrueClass, 'Only use public repos') { |_errors| options[:public_only] = true }
     [parser, options]
 end
@@ -60,9 +67,9 @@ end
 def create_parser
     options = DEFAULT_VALUES.dup
 
-
     parser = init_default_parser
     parser, options = add_parameters(parser, options)
+    parser, options = add_repo_parameters(parser, options)
     parser, options = add_repo_flag_parameters(parser, options)
     parser, options = add_flag_parameters(parser, options)
 

@@ -1,7 +1,51 @@
-name: ci
+name: pipeline
 on: [push, pull_request]
     
 jobs:
+  bundler:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.6', '2.7', '3.0', 'head' ]
+    name: Bundler Test on Ruby ${{ matrix.ruby }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Run Bundle Install
+        run: bundle install
+      - name: Run Bundle Exec rake
+        run: bundle exec rake
+  reek:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.6', '2.7', '3.0', 'head' ]
+    name: Reek Test on Ruby ${{ matrix.ruby }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Run Reek
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/reek/master/pipeline.sh)
+  rubocop:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.6', '2.7', '3.0', 'head' ]
+    name: Rubocop Test on Ruby ${{ matrix.ruby }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Run Rubocop
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/rubocop/master/pipeline.sh)
   awesomebot:
     name: Awesomebot
     runs-on: ubuntu-latest
@@ -39,6 +83,9 @@ jobs:
     if: always()
     name: Slack Post Workflow Notification
     needs:
+      - bundler
+      - reek
+      - rubocop
       - awesomebot
       - shellcheck
       - yaml-lint

@@ -7,5 +7,7 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/DevelopersToolbox/github-repo-stats/commits/master)
 
-- Initial commit - WIP [`[head]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/)
+- Update to clesan up basic pipelines [`[head]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/)
+
+- Initial commit - WIP [`[0a14b33]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/0a14b335fea781496a4dfbea4a0ec70651093ccd)
 

@@ -15,15 +15,15 @@ class GithubRepoStats
         end
 
         # This method smells of :reek:ControlParameter, :reek:LongParameterList
-        def add_title(table, repo_count, options)
+        def add_title(table, repo_count)
             title = "There were #{repo_count} #{plural(repo_count, 'repository', 'respositories')}"
 
             table.title = title
             table
         end
 
-        def add_single_row(table, repo, options)
-            table.add_row [ repo[:repo], repo[:org], repo[:watchers], repo[:stargazers], repo[:forks] ]
+        def add_single_row(table, repo)
+            table.add_row [repo[:repo], repo[:org], repo[:watchers], repo[:stargazers], repo[:forks]]
             table
         end
 
