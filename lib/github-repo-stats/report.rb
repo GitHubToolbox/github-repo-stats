@@ -12,10 +12,10 @@ class GithubRepoStats
         #
         # This method smells of :reek:LongParameterList, :reek:DuplicateMethodCall
         #
-        def draw_report(results, repo_count, options)
+        def draw_report(results, repo_count)
             table = create_table
-            table = add_title(table, repo_count, options)
-            table = add_rows(table, results, options)
+            table = add_title(table, repo_count)
+            table = add_rows(table, results)
             display_table(table)
         end
     end

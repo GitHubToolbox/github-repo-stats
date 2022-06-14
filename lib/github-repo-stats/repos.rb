@@ -37,7 +37,7 @@ class GithubRepoStats
             repos.map do |hash|
                 next if hash['private'] == true && flag_set?(options, :public_only)
 
-                { :slug => hash['full_name'], :repo => hash['name'], :org => hash['owner']['login'], :watchers => hash['watchers_count'], :stargazers => hash['stargazers_count'], :forks => hash['forks'] }
+                { :slug => hash['full_name'], :repo => hash['name'], :org => hash['owner']['login'], :watchers => hash['watchers_count'], :stargazers => hash['stargazers_count'], :forks => hash['forks'], :open_issues => hash['open_issues'] }
             end.compact.sort_by { |repo| repo[:repo].downcase }
         end
 

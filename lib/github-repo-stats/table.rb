@@ -11,7 +11,7 @@ class GithubRepoStats
 
         # This method smells of :reek:UtilityFunction
         def create_table
-            Terminal::Table.new :headings => ['Repository', 'Organisatio', 'Watchers', 'Star Gazers', 'Forks']
+            Terminal::Table.new :headings => ['Repository', 'Organisation', 'Watchers', 'Star Gazers', 'Forks', 'Open Issues']
         end
 
         # This method smells of :reek:ControlParameter, :reek:LongParameterList
@@ -23,12 +23,12 @@ class GithubRepoStats
         end
 
         def add_single_row(table, repo)
-            table.add_row [repo[:repo], repo[:org], repo[:watchers], repo[:stargazers], repo[:forks]]
+            table.add_row [repo[:repo], repo[:org], repo[:watchers], repo[:stargazers], repo[:forks], repo[:open_issues]]
             table
         end
 
-        def add_rows(table, results, options)
-            results.each { |repo| table = add_single_row(table, repo, options) }
+        def add_rows(table, results)
+            results.each { |repo| table = add_single_row(table, repo) }
             table
         end
 

@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/DevelopersToolbox/github-repo-stats/commits/master)
 
-- More updates and clean up [`[head]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/)
+- More clean up, add README and prepare for first release [`[head]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/)
+
+- More updates and clean up [`[ec1f4a0]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/ec1f4a0ec7a5c5184e8d06156ade85a6341c4d3c)
 
 - Update to clesan up basic pipelines [`[506ec4f]`](https://github.com/DevelopersToolbox/github-repo-stats/commit/506ec4f322b8b27128306d72da8b452aa4cf2ebc)
 

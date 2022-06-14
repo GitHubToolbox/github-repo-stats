@@ -27,7 +27,7 @@ end
 # This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
 def add_parameters(parser, options)
     parser.separator ''
-    parser.separator 'Parameters:'
+    parser.separator 'Access Parameters:'
     parser.on('-t', '--token <token>', 'GitHub personal access token (PAT)') { |token| options[:token] = token }
     [parser, options]
 end
@@ -35,32 +35,21 @@ end
 # This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
 def add_repo_parameters(parser, options)
     parser.separator ''
-    parser.separator 'Cloning Parameters:'
+    parser.separator 'Report Parameters:'
     parser.on('-u', '--user <names>', 'Github username(s) to rip') { |user| options[:user] = user }
     parser.on('-o', '--org <names>', 'Github organisation(s) to rip') { |org| options[:org] = org }
-    parser.on('-U', '--user-repos', TrueClass, 'Rip all of the repositories for the named user(s)') { |_dry_run| options[:user_repos] = true }
-    parser.on('-M', '--org-member-repos', TrueClass, 'Rip all of the repositories for all organisation the user(s) is a member of') { |_quiet| options[:org_members_repos] = true }
-    parser.on('-A', '--all-repos', TrueClass, 'Same as running -U -M') { |_silent| options[:all_repos] = true }
-    parser.on('-O', '--org-repos', TrueClass, 'Rip all of the repositories for the named organisation(s)') { |_errors| options[:org_repos] = true }
+    parser.on('-U', '--user-repos', TrueClass, 'Rip all of the repositories for the named user(s)') { |_user_repos| options[:user_repos] = true }
+    parser.on('-M', '--org-member-repos', TrueClass, 'Rip all of the repositories for all organisation the user(s) is a member of') { |_org_members_repos| options[:org_members_repos] = true }
+    parser.on('-A', '--all-repos', TrueClass, 'Same as running -U -M') { |_all_repos| options[:all_repos] = true }
+    parser.on('-O', '--org-repos', TrueClass, 'Rip all of the repositories for the named organisation(s)') { |_org_repos| options[:org_repos] = true }
     [parser, options]
 end
 
 # This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
 def add_repo_flag_parameters(parser, options)
     parser.separator ''
-    parser.separator 'Cloning Flags:'
+    parser.separator 'Report Flags:'
     parser.on('-P', '--public-only', TrueClass, 'Only use public repos') { |_errors| options[:public_only] = true }
-    [parser, options]
-end
-
-# This method reeks of :reek:UtilityFunction, :reek:TooManyStatements
-def add_flag_parameters(parser, options)
-    parser.separator ''
-    parser.separator 'Flags:'
-    parser.on('-d', '--dry-run', 'Show a list of repositories that WOULD be ripped') { |_dry_run| options[:dry_run] = true }
-    parser.on('-f', '--full', 'Show status of all repositories in post run report') { |_errors| options[:full_report] = true }
-    parser.on('-q', '--quiet', 'Suppress the showing of the post run report') { |_quiet| options[:quiet] = true }
-    parser.on('-s', '--silent', 'Suppress all output') { |_silent| options[:silent] = true }
     [parser, options]
 end
 
@@ -71,7 +60,6 @@ def create_parser
     parser, options = add_parameters(parser, options)
     parser, options = add_repo_parameters(parser, options)
     parser, options = add_repo_flag_parameters(parser, options)
-    parser, options = add_flag_parameters(parser, options)
 
     [parser, options]
 end

@@ -22,14 +22,10 @@ class GithubRepoStats
         # Do something ...
         #
         def get_stats(options = {})
-            raise StandardError.new('Please supply a token (-t)') unless get_option(options, :token)
-
-            options[:add_workflows] = true
-
             repos = get_repo_list(options)
 
             results, repo_count = process_results(repos, options)
-            draw_report(results, repo_count, options)
+            draw_report(results, repo_count)
         end
     end
 end
