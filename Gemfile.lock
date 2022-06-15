@@ -20,7 +20,7 @@ GEM
     github-lister-core (0.1.6)
       octokit (~> 4)
       parallel (~> 1.2)
-    octokit (4.24.0)
+    octokit (4.25.0)
       faraday (>= 1, < 3)
       sawyer (~> 0.9)
     parallel (1.22.1)
@@ -50,6 +50,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   bundler (~> 2)
